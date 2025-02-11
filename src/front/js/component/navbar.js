@@ -1,7 +1,16 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 export const Navbar = () => {
+  const {store, actions}= useContext(Context)
+  const navigate = useNavigate()
+
+  const handleLogout = () =>{
+    actions.logout()
+    navigate ('/')
+}
+
 	return (
 		<nav className="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
   <div className="container-fluid">
@@ -26,6 +35,7 @@ export const Navbar = () => {
           <ul className="dropdown-menu dropdown-menu-end">
             <li><a className="dropdown-item" href="/perfil">Mi Perfil</a></li>
             <li className="dropdown-divider"></li>
+            <li><a className="dropdown-item" onClick={handleLogout}>Cerrar Sesión</a></li>
            
           </ul>
         </li>
